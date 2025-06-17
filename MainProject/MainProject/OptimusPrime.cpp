@@ -24,13 +24,11 @@ int getInputFromUser() {
     try {
         userInputAsNum = stoi(userInput, &firstNotNumericIndex);
     } catch (...) {
-        cout << "Not a number! bye" << endl;
-        throw;
+        throw std::exception("Not a number! bye");
     }
 
     if (firstNotNumericIndex != userInput.length()) {
-        cout << "Not a number! bye" << endl;
-        throw ILLEGAL_NUM;
+        throw std::exception("Not a number! bye");
         
     }
 
@@ -63,7 +61,8 @@ int main() {
 
     try {
         userInputAsNum = getInputFromUser();
-    } catch (...) {
+    } catch (std::exception e) {
+        cout << e.what() << endl;
         return 1;
     }
 
