@@ -127,7 +127,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="OptimusPrime.cpp" />
+    <ClCompile Include="BumbleBee.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="BumbleBee.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
