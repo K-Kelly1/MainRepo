@@ -1,11 +1,18 @@
 #pragma once
 #include <iostream>
 
-using std::cin;
-using std::cout;
-using std::endl;
+const unsigned int MULTIPLICATION_TABLE_LEN = 11;
 
-const int multiplicationTableLen = 11;
+/*
+* @brief - prints a multiplication table
+* @param matrix - the multiplication table to print
+* @return - nothing
+*/
+void printMultiplicationTable(int matrix[MULTIPLICATION_TABLE_LEN][MULTIPLICATION_TABLE_LEN]);
 
-void printMultiplicationTable(int matrix[multiplicationTableLen][multiplicationTableLen]);
-void createMultiplicationTable(int multiplicationTable[multiplicationTableLen][multiplicationTableLen]);
+/*
+ * @brief - initialize a multiplication table
+ * @param multiplicationTable - the multiplication table to initialize
+ * @return - nothing
+ */
+void initializeMultiplicationTable(int multiplicationTable[MULTIPLICATION_TABLE_LEN][MULTIPLICATION_TABLE_LEN]);

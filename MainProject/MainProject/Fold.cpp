@@ -1,10 +1,12 @@
 #include "Fold.h"
 
-void printMultiplicationTable(int matrix[multiplicationTableLen][multiplicationTableLen]) {
-    for (int i = 0; i < multiplicationTableLen; i++)
-    {
-        for (int j = 0; j < multiplicationTableLen; j++)
-        {
+using std::cin;
+using std::cout;
+using std::endl;
+
+void printMultiplicationTable(int matrix[MULTIPLICATION_TABLE_LEN][MULTIPLICATION_TABLE_LEN]) {
+    for (int i = 0; i < MULTIPLICATION_TABLE_LEN; i++) {
+        for (int j = 0; j < MULTIPLICATION_TABLE_LEN; j++) {
             cout << matrix[i][j] << "\t";
         }
 
@@ -12,28 +14,28 @@ void printMultiplicationTable(int matrix[multiplicationTableLen][multiplicationT
     }
 }
 
-void createMultiplicationTable(int multiplicationTable[multiplicationTableLen][multiplicationTableLen]) {
+void initializeMultiplicationTable(int multiplicationTable[MULTIPLICATION_TABLE_LEN][MULTIPLICATION_TABLE_LEN]) {
     multiplicationTable[0][0] = 0;
 
-    for (int i = 1; i < multiplicationTableLen; i++)
-    {
-        multiplicationTable[0][i] = i;
-        multiplicationTable[i][0] = i;
-    }
-
-    for (int i = 1; i < multiplicationTableLen; i++)
-    {
-        for (int j = 1; j < multiplicationTableLen; j++)
-        {
-            multiplicationTable[i][j] = multiplicationTable[i][0] * multiplicationTable[0][j];
+    for (int i = 0; i < MULTIPLICATION_TABLE_LEN; i++) {
+        for (int j = 0; j < MULTIPLICATION_TABLE_LEN; j++) {
+            if (i == 0) {
+                multiplicationTable[0][j] = j;
+            }
+            else if (j == 0) {
+                multiplicationTable[i][0] = i;
+            }
+            else {
+                multiplicationTable[i][j] = multiplicationTable[i][0] * multiplicationTable[0][j];
+            }
         }
     }
 }
 
 int main() {
-    int multiplicationTable[multiplicationTableLen][multiplicationTableLen] = {0};
+    int multiplicationTable[MULTIPLICATION_TABLE_LEN][MULTIPLICATION_TABLE_LEN] = {0};
 
-    createMultiplicationTable(multiplicationTable);
+    initializeMultiplicationTable(multiplicationTable);
     printMultiplicationTable(multiplicationTable);
 
     return 0;
