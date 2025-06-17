@@ -1,30 +1,40 @@
 #include <limits>
 #include <iostream>
+#include <string>
 
+using std::string;
 using std::cin;
 using std::cout;
 using std::endl;
 
 int main() {
-    double userNum = 0;
+    double userInputAsNum = 0;
     double userNumSqrt = 0;
+    string userInput;
+    size_t firstNotNumericIndex;
 
     cout << "Please enter a number: ";
-    cin >> userNum;
-
-    while (cin.fail()) {
-        cin.clear();
-        cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-        cout << "Bad input! Try again: ";
-        cin >> userNum;
+    cin >> userInput;
+    
+    try {
+        userInputAsNum = stod(userInput, &firstNotNumericIndex);
+    }
+    catch (...) {
+        cout << "Not a number! bye" << endl;
+        return 1;
     }
 
-    if (userNum < 0) {
+    if (firstNotNumericIndex != userInput.length()) {
+        cout << "Not a number! bye 1" << endl;
+        return 1;
+    }
+
+     if (userInputAsNum < 0) {
         cout << "The number must be non-negative" << endl;
         return 1;
     }
 
-    userNumSqrt = sqrt(userNum);
+    userNumSqrt = sqrt(userInputAsNum);
 
     cout << "The sqrt is: " << userNumSqrt << endl;
 
