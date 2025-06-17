@@ -10,16 +10,15 @@ using std::endl;
 int main() {
     double userInputAsNum = 0;
     double userNumSqrt = 0;
-    string userInput;
-    size_t firstNotNumericIndex;
+    string userInput = "";
+    size_t firstNotNumericIndex = 0;
 
     cout << "Please enter a number: ";
     cin >> userInput;
     
     try {
         userInputAsNum = stod(userInput, &firstNotNumericIndex);
-    }
-    catch (...) {
+    } catch (...) {
         cout << "Not a number! bye" << endl;
         return 1;
     }
