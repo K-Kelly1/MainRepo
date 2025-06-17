@@ -1,4 +1,4 @@
-#include <cmath>
+#include <limits>
 #include <iostream>
 
 using std::cin;
@@ -12,14 +12,21 @@ int main() {
     cout << "Please enter a number: ";
     cin >> userNum;
 
+    while (cin.fail()) {
+        cin.clear();
+        cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        cout << "Bad input! Try again: ";
+        cin >> userNum;
+    }
+
     if (userNum < 0) {
-        cout << "The number must be not-negative" << endl;
-        return 0;
+        cout << "The number must be non-negative" << endl;
+        return 1;
     }
 
     userNumSqrt = sqrt(userNum);
 
     cout << "The sqrt is: " << userNumSqrt << endl;
 
-    return 1;
+    return 0;
 }
