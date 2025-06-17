@@ -7,31 +7,41 @@ using std::cin;
 using std::cout;
 using std::endl;
 
-// Gets input from user and check this is an int
-int getInputFromUser(int* userInputAsNum) {
-    string userInput;
-    size_t firstNotNumericIndex;
+const int ILLEGAL_NUM = 1;
+
+/**
+ * @brief Get input from user
+ * @return the user input as int
+ */
+int getInputFromUser() {
+    int userInputAsNum = 0;
+    string userInput = "";
+    size_t firstNotNumericIndex = 0;
 
     cout << "Please enter a number: ";
     cin >> userInput;
 
     try {
-        *userInputAsNum = stoi(userInput, &firstNotNumericIndex);
-    }
-    catch (...) {
+        userInputAsNum = stoi(userInput, &firstNotNumericIndex);
+    } catch (...) {
         cout << "Not a number! bye" << endl;
-        return 1;
+        throw;
     }
 
     if (firstNotNumericIndex != userInput.length()) {
         cout << "Not a number! bye" << endl;
-        return 1;
+        throw ILLEGAL_NUM;
+        
     }
 
-    return 0;
+    return userInputAsNum;
 }
 
-// Check if number is prime
+/**
+ * @brief Check if number is prime
+ * @param number The nmber to check if prime
+ * @return true if prime, else - false
+ */
 bool isPrime(int number) {
     if (number <= 1) {
         return false;
@@ -49,11 +59,11 @@ bool isPrime(int number) {
 }
 
 int main() {
-    int userInputAsNum;
-    int getInputOutput = getInputFromUser(&userInputAsNum);
+    int userInputAsNum = 0;
 
-    // If the input wasnt valid - bye
-    if (getInputOutput != 0) {
+    try {
+        userInputAsNum = getInputFromUser();
+    } catch (...) {
         return 1;
     }
 
@@ -61,8 +71,7 @@ int main() {
 
     if (isInputPrime) {
         cout << "The number " << userInputAsNum << " is prime!" << endl;
-    }
-    else {
+    } else {
         cout << "The number " << userInputAsNum << " is not prime!" << endl;
     }
 
