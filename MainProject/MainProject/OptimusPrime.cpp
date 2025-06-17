@@ -61,7 +61,7 @@ int main() {
 
     try {
         userInputAsNum = getInputFromUser();
-    } catch (std::exception e) {
+    } catch (std::exception& e) {
         cout << e.what() << endl;
         return 1;
     }
