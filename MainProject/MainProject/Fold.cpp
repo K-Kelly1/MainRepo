@@ -17,17 +17,9 @@ void printMultiplicationTable(unsigned int matrix[MULTIPLICATION_TABLE_LEN][MULT
 void initializeMultiplicationTable(unsigned int multiplicationTable[MULTIPLICATION_TABLE_LEN][MULTIPLICATION_TABLE_LEN]) {
     multiplicationTable[0][0] = 0;
 
-    for (int i = 0; i < MULTIPLICATION_TABLE_LEN; i++) {
-        for (int j = 0; j < MULTIPLICATION_TABLE_LEN; j++) {
-            if (i == 1) {
-                multiplicationTable[1][j] = j;
-            }
-            else if (j == 1) {
-                multiplicationTable[i][1] = i;
-            }
-            else {
-                multiplicationTable[i][j] = multiplicationTable[i][1] * multiplicationTable[1][j];
-            }
+    for (int i = 1; i < MULTIPLICATION_TABLE_LEN; i++) {
+        for (int j = 1; j < MULTIPLICATION_TABLE_LEN; j++) {
+            multiplicationTable[i][j] = i*j;
         }
     }
 }
