@@ -1,83 +1,32 @@
 #include <cmath>
 #include <iostream>
 #include <string>
-#include <vector>
+
+#include "GenericFunctions.h"
 
 using std::cin;
 using std::cout;
 using std::endl;
 using std::string;
-using std::vector;
-
-const int ILLEGAL_NUM = 1;
 
 /**
- * @brief Get input from user
- * @return the user input as int
+ * @brief Initializes primes array of size arrayLen
+ * @param primesArray the array to insert primes to
+ * @param arrayLen the len of the array
  */
-int getInputFromUser() {
-    int userInputAsNum = 0;
-    string userInput = "";
-    size_t firstNotNumericIndex = 0;
-
-    cout << "Please enter a number: ";
-    cin >> userInput;
-
-    try {
-        userInputAsNum = stoi(userInput, &firstNotNumericIndex);
-    } catch (...) {
-        throw std::exception("Not a number! bye");
-    }
-
-    if (firstNotNumericIndex != userInput.length()) {
-        throw std::exception("Not a number! bye");
-    }
-
-    if (userInputAsNum < 1) {
-        throw std::exception("Not a positive number! bye");
-    }
-
-    return userInputAsNum;
-}
-
-/**
- * @brief Check if number is prime
- * @param number The nmber to check if prime
- * @return true if prime, else - false
- */
-bool isPrime(int number) {
-    if (number <= 1) {
-        return false;
-    }
-
-    double userNumSqrt = sqrt(number);
-
-    for (int i = 2; i <= userNumSqrt; i++) {
-        if (number % i == 0) {
-            return false;
-        }
-    }
-
-    return true;
-}
-
-/**
- * @brief Create primes vector of size vectorLen
- * @param primesVector the vector to insert primes to
- * @param vectorLen the len of the vector
- */
-void createPrimesVector(vector<int>& primesVector, int vectorLen) {
-    int primesCounter = 0;
-    int currNum = 2;
+void initializePrimesArray(int* primesArray, unsigned int arrayLen) {
+    const int SMALLER_PRIME = 2;
+    unsigned int primesCounter = 0;
+    int currNum = SMALLER_PRIME;
     bool foundInThisIteration = false;
 
-    while (primesCounter < vectorLen) {
+    while (primesCounter < arrayLen) {
         while (!foundInThisIteration) {
             bool isNumPrime = isPrime(currNum);
 
             if (isNumPrime) {
                 foundInThisIteration = true;
-                primesVector[primesCounter] = currNum;
+                primesArray[primesCounter] = currNum;
             }
 
             currNum++;
@@ -88,38 +37,22 @@ void createPrimesVector(vector<int>& primesVector, int vectorLen) {
     }
 }
 
-/**
- * @brief Print vector
- * @param vector the vector to print
- * @param vectorLen the len of the vector
- */
-void printVector(vector<int>& vector, int vectorLen) {
-    cout << "The vector: " << endl;
+int main() {
+    unsigned int numOfPrimesToFind = 0;
 
-    for (int i = 0; i < vectorLen; i++) {
-        cout << vector[i] << " ";
-    }
-}
-
-int main()
-{
-    int numOfPrimesToFind = 0;
-
-    try
-    {
-        numOfPrimesToFind = getInputFromUser();
-    }
-    catch (const std::exception& e)
-    {
+    try {
+        numOfPrimesToFind = getPositiveIntFromUser();
+    } catch (const std::exception& e) {
         cout << e.what() << endl;
         return 1;
     }
 
-    vector<int> primesVector{0};
-    primesVector.resize(numOfPrimesToFind);
+    int* primesArray = new int[numOfPrimesToFind];
 
-    createPrimesVector(primesVector, numOfPrimesToFind);
-    printVector(primesVector, numOfPrimesToFind);
+    initializePrimesArray(primesArray, numOfPrimesToFind);
+    printArray(primesArray, numOfPrimesToFind);
+
+    delete[] primesArray;
 
     return 0;
 }
